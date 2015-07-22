@@ -2,10 +2,12 @@ window.addEventListener('DOMContentLoaded', function() {
   var $ = function(sel, node) {
     return (node || document).querySelector(sel);
   };
-  if (!$('[id^=user-style-][id$=-bg-img]')) {
+  var userName = $('.js-mini-current-user').dataset.screenName;
+  var cssSelector = '#user-style-' + userName + '-bg-img';
+  if (!$(cssSelector)) {
     var xhr = new XMLHttpRequest();
     xhr.addEventListener('load', function() {
-      var style = $('[id^=user-style-][id$=-bg-img]', this.responseXML);
+      var style = $(cssSelector, this.responseXML);
       if (style) document.body.appendChild(style);
     });
     xhr.open('GET', '/settings/design/update_ms');

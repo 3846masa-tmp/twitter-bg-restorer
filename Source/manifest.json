@@ -1,16 +1,21 @@
 {
-	"manifest_version": 2,
-	"name": "Twitter Background Replacer",
-	"version": "1.0",
-	"description": "Replaces the horrible, white background with your actual BG.",
-    "permissions": ["http://*.twitter.com/", "https://*.twitter.com/", "storage"],
-    "options_page": "options.html",
-	"content_scripts":
-	[
-		{
-			"matches": ["http://*.twitter.com/", "https://*.twitter.com/"],
-			"js": ["content_script.js"],
-			"run_at": "document_idle"
-		}
-	]
+  "manifest_version": 2,
+  "name": "Twitter Background Replacer",
+  "version": "1.1",
+  "description": "Replaces the horrible, white background with your actual BG.",
+  "permissions": [
+    "http://*.twitter.com/",
+    "https://*.twitter.com/",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.twitter.com/",
+        "https://*.twitter.com/"
+      ],
+      "js": ["content_script.js"],
+      "run_at": "document_start"
+    }
+  ]
 }

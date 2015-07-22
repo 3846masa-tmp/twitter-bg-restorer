@@ -1,18 +1,15 @@
-var body = document.getElementsByTagName('body')[0];
-chrome.storage.sync.get({
-    backgroundURL: '',
-    backgroundTile: true,
-    backgroundColour: '',
-    backgroundType: 'image'
-}, function(items) {
-    if(items.backgroundType == 'image') {
-        body.style.backgroundImage = 'url(' + items.backgroundURL + ')';
-        if(items.backgroundTile) {
-            body.style.backgroundRepeat = 'repeat';
-        } else {
-            body.style.backgroundRepeat = 'no-repeat';
-        }
-    } else {
-        body.style.backgroundColor = items.backgroundColour;
-    }
+window.addEventListener('DOMContentLoaded', function() {
+  var $ = function(sel, node) {
+    return (node || document).querySelector(sel);
+  };
+  if (!$('[id^=user-style-][id$=-bg-img]')) {
+    var xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', function() {
+      var style = $('[id^=user-style-][id$=-bg-img]', this.responseXML);
+      if (style) document.body.appendChild(style);
+    });
+    xhr.open('GET', '/settings/design/update_ms');
+    xhr.responseType = "document";
+    xhr.send();
+  }
 });
